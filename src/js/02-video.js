@@ -1,12 +1,18 @@
-const throttle = require('lodash.throttle');
+import throttle from 'lodash.throttle';
 
-    const iframe = document.querySelector('iframe');
-    const player = new Vimeo.Player(iframe);
-
-      player.on('play', function () {
-        console.log('played the video!');
-      });
-
-      player.getVideoTitle().then(function (title) {
-        console.log('title:', title);
-      });
+class VideoPlayer {
+  iframe = document.querySelector('iframe');
+  player = new Player(this.iframe);
+  updateTime() {
+    console.log(player);
+    this.currentTime = this.player.getCurrentTime().then(function (seconds) {
+      console.log('time updated! ' + seconds + "  !!! ");
+      localStorage.setItem("videoplayer-current-time", seconds);
+    }).catch(function (error) {
+      // an error occurred
+    });
+    this.player.on('timeupdate', throttle(this.updateTime, 1000));
+  };
+  // const iplayer = new VideoPlayer();
+  // iplayer.updateTime();
+}
