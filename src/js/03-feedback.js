@@ -16,7 +16,6 @@ refs.form.addEventListener('submit', onFormSubmit);
 
 refs.form.addEventListener('input', throttle(evt => {
     formData[evt.target.name] = evt.target.value;
-    console.log(formData)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
 }), 500);
 
@@ -24,7 +23,7 @@ function onFormSubmit(event) {
     event.preventDefault();
     if (refs.input.value === "" || refs.textarea.value === "") {
         alert("Please fill in all the fields!");
-    }
+    } console.log(formData)
 
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY)
