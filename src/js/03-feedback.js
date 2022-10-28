@@ -22,6 +22,9 @@ refs.form.addEventListener('input', throttle(evt => {
 
 function onFormSubmit(event) {
     event.preventDefault();
+    if (refs.input.value === "" || refs.textarea.value === "") {
+        alert("Please fill in all the fields!");
+    }
 
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY)
